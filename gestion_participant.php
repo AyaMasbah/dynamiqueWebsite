@@ -66,31 +66,33 @@ catch(PDOException $e){
 ?>
 <div class="col-md-6">
     <br>
+
+    
+
         <h3>Ajout de participant:</h3><br>
 <form method="POST" >
 <div class="form-group">
 <label>Id:</label>
-<input type="text" class="form-control" name="idPar">
+<input type="text" class="form-control" name="idPar" required>
 </div>
 <div class="form-group">
 <label>Nom:</label>
-<input type="text" class="form-control" name="nomPar">
+<input type="text" class="form-control" name="nomPar" required>
 </div>
 <div class="form-group">
 <label>Prenom:</label>
-<input type="text" class="form-control" name="prenomPar">
+<input type="text" class="form-control" name="prenomPar" required>
 </div>
 <div class="form-group">
 <label>Age:</label>
-<input type="number" class="form-control" name="agePar">
+<input type="number" class="form-control" name="agePar" required>
 </div>
 <div class="form-group">
 <label>Email:</label>
-<input type="email" class="form-control" name="emailPar">
-</div>
+<input type="email" class="form-control" name="emailPar" required
 <div class="form-group">
 <label>Talent:</label>
-<input type="text" class="form-control" name="talent">
+<input type="text" class="form-control" name="talent"required>
 </div>
 
 <button type="submit" class="btn btn-primary">Ajouter</button>
