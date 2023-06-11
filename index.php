@@ -10,11 +10,12 @@
 <body>
      <div class="container my-5"></div>
         <h2>Listes des participants</h2>
-        <a class="btn btn-primary" href="/siphpmysql/create.php" role="button" >New Particpant</a>
+        <a class="btn btn-primary" href="/DynamiqueWebsite/create.php" role="button" >New Particpant</a>
         <br>
         <table class="table">
           <thead>
             <tr>
+               <th>ID Competition</th>
                <th>ID</th>
                <th>NOM</th>
                <th>Prenom</th>
@@ -54,6 +55,7 @@
                     echo"
                     
                     <tr>
+                        <td>$row[idComp]</td>
                         <td>$row[idPar]</td>
                         <td>$row[nomPar]</td>
                         <td>$row[prenomPar]</td>

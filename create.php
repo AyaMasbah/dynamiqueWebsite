@@ -10,7 +10,7 @@ $database="competition";
 
 
 
-
+$idComp="";
 $nomPar="";
 $prenomPar="";
 $agePar="";
@@ -36,8 +36,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
         //add neww client to databse
 
-        $sql = "INSERT INTO participants (nomPar,prenomPar,agePar,emailPar,telPar,adrPar)" .
-               "VALUES ('$nomPar','$prenomPar','$agePar','$emailPar',' $telPar',' $adrPar')";
+        $sql = "INSERT INTO participants (idComp,nomPar,prenomPar,agePar,emailPar,telPar,adrPar)" .
+               "VALUES ('$idComp','$nomPar','$prenomPar','$agePar','$emailPar',' $telPar',' $adrPar')";
 
         $result = $connection->query($sql);
 
@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             $errorMessage = "Invalid Query ". $connection->error;
             break;
         }
-        
+        $idComp="";
         $nomPar="";
         $prenomPar="";
         $agePar="";
@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
         $successMessage = "Client added correctly" ;
 
-        header("location: /siphpmysql/index.php");
+        header("location: /DynamiqueWebsite/index.php");
         exit;
 
     } while(false);
@@ -91,6 +91,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 
         <form action="" method="POST">
+            <div class="row-mb-3">
+                 <label class="col-sm-3 col-form-label">ID Competition</label>
+                 <div class="col-sm-6">
+                    <input type="sel" class="form-control" name="idComp" value="<?php echo $idComp; ?>">
+                 </div>
+            </div>
             <div class="row-mb-3">
                  <label class="col-sm-3 col-form-label">NomParticipant</label>
                  <div class="col-sm-6">
