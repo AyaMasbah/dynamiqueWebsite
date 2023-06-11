@@ -1,41 +1,38 @@
 <?php
-session_start();
-if(isset($_POST['username']) && isset($_POST['password']))
-{
- // connexion à la base de données
- $db_username = 'root';
- $db_password = '';
- $db_name = 'login';
- $db_host = 'localhost';
- $db = mysqli_connect($db_host, $db_username, $db_password,$db_name)
- or die('could not connect to database');
- 
- // on applique les deux fonctions mysqli_real_escape_string et htmlspecialchars
- // pour éliminer toute attaque de type injection SQL et XSS
- $username = mysqli_real_escape_string($db,htmlspecialchars($_POST['username'])); 
- $password = mysqli_real_escape_string($db,htmlspecialchars($_POST['password']));
- 
- if($username == "admin" && $password == "123")
- {
- $requete = "SELECT count(*) FROM connexion where 
- username = '".$username."' and password = '".$password."' ";
- $exec_requete = mysqli_query($db,$requete);
- $reponse = mysqli_fetch_array($exec_requete);
- $count = $reponse['count(*)']; // nom d'utilisateur et mot de passe correctes
- 
- $_SESSION['username'] = $username;
- header('Location: principale.php');
- 
- }
- else
- {
- header('Location: login.php?erreur=utilisateuroumotdepasseinvalide'); // utilisateur ou mot de passe vide
+$host = 'localhost';
+$dbname = 'competition';
+$username = 'root';
+$password = '';
 
- }
+try {
+    $db = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    // Définir le mode d'erreur de PDO à Exception
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die('Erreur : ' . $e->getMessage());
 }
-else
-{
- header('Location: login.php');
+
+if (isset($_POST['submit'])) {
+    $username = $_POST['username'];
+    $username = filter_var($username, FILTER_SANITIZE_STRING);
+    $password = $_POST['password'];
+    $password = filter_var($password, FILTER_SANITIZE_STRING);
+
+    $verify_username = $db->prepare("SELECT * FROM `jury` WHERE username = ? LIMIT 1");
+    $verify_username->execute([$username]);
+
+    if ($verify_username->rowCount() > 0) {
+        $fetch = $verify_username->fetch(PDO::FETCH_ASSOC);
+        $verfiy_password = password_verify($password, $fetch['password']);
+        if ($verfiy_password == 1) {
+            setcookie('user_id', $fetch['id'], time() + 60*60*24*30, '/');
+            header('location: all_posts.php');
+            exit;
+        } else {
+            $warning_msg[] = 'Incorrect password!';
+        }
+    } else {
+        $warning_msg[] = 'Incorrect username!';
+    }
 }
-mysqli_close($db); // fermer la connexion
 ?>
