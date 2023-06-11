@@ -65,8 +65,8 @@
                         <td>$row[adrPar]</td>
                         <td>$row[created_at]</td>
                              <td>
-                                  <a class='btn btn-primary btn-sm' href='/siphpmysql/edit.php?idPar=$row[idPar]'>Edit</a>
-                                  <a class='btn btn-danger btn-sm' href='/siphpmysql/delete.php?idPar=$row[idPar]'>Delete</a>
+                                  <a class='btn btn-primary btn-sm' href='/DynamiqueWebsite/edit.php?idPar=$row[idPar]'>Edit</a>
+                                  <a class='btn btn-danger btn-sm' href='/DynamiqueWebsite/delete.php?idPar=$row[idPar]'>Delete</a>
                               </td>
                     </tr>
                     ";

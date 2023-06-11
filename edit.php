@@ -8,7 +8,7 @@ $database="competition";
   //Create Connexion
   $connection = new mysqli($servername, $username , $password,$database );
 
-
+$idComp="";
 $idPar="";
 $nomPar="";
 $prenomPar="";
@@ -25,7 +25,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
 
 
     if(!isset($_GET['idPar'])){
-        header("location:/siphpmysql/index.php");
+        header("location:/DynamiqueWebsite/index.php");
         exit; 
     }
     $idPar = $_GET["idPar"];
@@ -37,9 +37,10 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
 
 
      if(!$row){
-        header("location: /siphpmysql/index.php");
+        header("location: /DynamiqueWebsite/index.php");
         exit;
      }
+     $idComp=$row["idComp"];
      $nomPar = $row["nomPar"];
      $prenomPar = $row["prenomPar"];
      $agePar = $row["agePar"];
@@ -50,6 +51,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
 }
     else
     {    // update data of the participant
+    $idComp=$_POST["idComp"];
     $idPar = $_POST['idPar'];
     $nomPar = $_POST['nomPar'];
     $prenomPar = $_POST['prenomPar'];
@@ -65,7 +67,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
      }
  //   $sql = "UPDATE `participants` SET `nomPar`=\'[value-1]\',`prenomPar`=\'[value-2]\',`agePar`=18,`emailPar`=\'[value-4]\',`telPar`=8755456,`adrPar`=\'[value-6]\' WHERE 1;";
 
-    $sql = "UPDATE `participants` SET `nomPar` = '$nomPar',`prenomPar`= '$prenomPar',`agePar`= '$agePar',`emailPar`= '$emailPar',`telPar`= '$telPar',`adrPar`= '$adrPar' WHERE idPar = $idPar ";
+    $sql = "UPDATE `participants` SET  `idComp`='$idComp', `nomPar` = '$nomPar',`prenomPar`= '$prenomPar',`agePar`= '$agePar',`emailPar`= '$emailPar',`telPar`= '$telPar',`adrPar`= '$adrPar' WHERE idPar = $idPar ";
             $result = $connection->query($sql);
     if(!$result){
         $errorMessage = "invalid query : " .$connection->error ;
@@ -73,7 +75,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
     }
     $successMessage = "Client updated correctly";
 
-    header("location: /siphpmysql/index.php");
+    header("location: /DynamiqueWebsite/index.php");
 
 
 }
@@ -178,7 +180,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
                 <div class=" col-sm-3 d-grid">
-                    <a class="btn btn-outline-primary" href="/siphpmysql/index.php" role="button">Cancel</a>
+                    <a class="btn btn-outline-primary" href="/DynamiqueWebsite/index.php" role="button">Cancel</a>
                 </div>
             </div>
         </form>

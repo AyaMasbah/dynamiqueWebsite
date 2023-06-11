@@ -22,6 +22,7 @@ $errorMessage = "";
 $successMessage ="";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+    $idComp = $_POST["idComp"];    
     $nomPar = $_POST["nomPar"];
     $prenomPar = $_POST["prenomPar"];
     $agePar = $_POST["agePar"];
@@ -91,10 +92,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 
         <form action="" method="POST">
+
+
             <div class="row-mb-3">
                  <label class="col-sm-3 col-form-label">ID Competition</label>
                  <div class="col-sm-6">
-                    <input type="sel" class="form-control" name="idComp" value="<?php echo $idComp; ?>">
+                 <select name="idComp" id="idComp" class="form-control" value="<?php echo $idComp; ?>">
+                 <option value="">version de Competition</option>
+                <option value="2022">2022</option>
+                <option value="2021">2021</option>
+                 <option value="2020">2020</option>
+                 <option value="2019">2019</option>
+                    </select>
                  </div>
             </div>
             <div class="row-mb-3">
@@ -161,7 +170,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
                 <div class=" col-sm-3 d-grid">
-                    <a class="btn btn-outline-primary" href="/siphpmysql/index.php" role="button">Cancel</a>
+                    <a class="btn btn-outline-primary" href="/mysql/index.php" role="button">Cancel</a>
                 </div>
             </div>
         </form>
